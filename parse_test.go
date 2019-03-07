@@ -8,9 +8,9 @@ import (
 )
 
 var (
-	testUsers = [...]string{
-		"profile/Skwizz",
-		"profile/Ahmedlzs",
+	testUsers = []string{
+		"/profile/Skwizz",
+		"/profile/Ahmedlzs",
 		"/profile/VHMD",
 		"/profile/aPPPLL",
 		"/profile/KittyLilly",
@@ -28,7 +28,7 @@ var (
 		"/profile/Sandshrew2",
 		"/profile/attorrep",
 		"/profile/destroyer068",
-		"/profile/Eternal-Destiny"
+		"/profile/Eternal-Destiny",
 	}
 )
 
@@ -38,6 +38,7 @@ func TestGetUsers(t *testing.T) {
 		t.Errorf("Could not load test page.")
 	}
 	users := GetUsers(page)
-	assert.Assert(users == testUsers)
-
+	// fmt.Println(users)
+	// fmt.Println(testUsers)
+	assert.DeepEqual(t, users, testUsers)
 }
