@@ -3,19 +3,29 @@ package malutil
 import (
 	"fmt"
 	"io"
+	"net/http"
 	"strings"
 
 	"golang.org/x/net/html"
 )
 
 const (
-	usersPage       = "http://myanimelist.net/users.php"
 	userProfilePath = "/profile/"
+	malusers        = "http://myanimelist.net/users.php"
 )
 
-// GetUsers returns a list of MAL users from /users.php
+// GetUsers returns a slice of MAL usernames from /users.php
+func GetUsers() ([]string, error) {
+	resp, err := http.Get(malusers)
+	if err != nil {
+		return nil, err
+	}
+	return GetUsersFromPage(resp.Body), nil
+}
+
+// GetUsersFromPage returns a slice of MAL usernames from /users.php
 // It is assumed that usersPage is valid, UTF-8 encoded HTML
-func GetUsers(usersPage io.ReadCloser) []string {
+func GetUsersFromPage(usersPage io.ReadCloser) []string {
 	defer usersPage.Close()
 	// MAL users page has a 5 x 4 table of users
 	usersList := make([]string, 0, 20)
