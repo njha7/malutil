@@ -37,7 +37,7 @@ func TestGetUsers(t *testing.T) {
 	if err != nil {
 		t.Errorf("Could not load test page.")
 	}
-	users := GetUsers(page)
+	users := GetUsersFromPage(page)
 	// fmt.Println(users)
 	// fmt.Println(testUsers)
 	assert.DeepEqual(t, users, testUsers)

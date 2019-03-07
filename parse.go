@@ -1,7 +1,6 @@
 package malutil
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"strings"
@@ -44,7 +43,6 @@ func GetUsersFromPage(usersPage io.ReadCloser) []string {
 					if strings.HasPrefix(attr.Val, userProfilePath) {
 						_, ok := usersSet[attr.Val]
 						if !ok {
-							fmt.Println(attr.Val)
 							usersList = append(usersList, attr.Val)
 							usersSet[attr.Val] = true
 						}
