@@ -41,10 +41,11 @@ func GetUsersFromPage(usersPage io.ReadCloser) []string {
 			for _, attr := range token.Attr {
 				if attr.Key == "href" {
 					if strings.HasPrefix(attr.Val, userProfilePath) {
-						_, ok := usersSet[attr.Val]
+						user := strings.Split(attr.Val, "/profile/")[1]
+						_, ok := usersSet[user]
 						if !ok {
-							usersList = append(usersList, attr.Val)
-							usersSet[attr.Val] = true
+							usersList = append(usersList, user)
+							usersSet[user] = true
 						}
 					}
 				}
